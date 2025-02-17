@@ -3,29 +3,38 @@
 # b) Em que posição foi digitado o primeiro valor 3
 # c) Quais foram os números pares
 
-tupla_quatro_valores = tuple(int(input("Digite um número: ")) for _ in range(4))
-print(f'Tupla com os quatro valores: {tupla_quatro_valores}')
+def main():
+    """
+    Coleta 4 números do usuário e analisa:
+    - Frequência do número 9
+    - Posição do primeiro número 3
+    - Números pares encontrados
+    """
+    # Coleta os números usando list comprehension
+    numeros = tuple(int(input(f"Digite o {i+1}º número: ")) for i in range(4))
 
-if tupla_quatro_valores.count(9) == 1:
-    print(f'O valor 9 apareceu {tupla_quatro_valores.count(9)} vez.')
-else:
-    print(f'O valor 9 apareceu {tupla_quatro_valores.count(9)} vezes.')
+    # Análise dos números
+    qtd_nove = numeros.count(9)
+    numeros_pares = tuple(num for num in numeros if num % 2 == 0)
 
-if 3 in tupla_quatro_valores:
-    print(f'O primeiro valor 3 foi digitado na posição {tupla_quatro_valores.index(3) + 1}.')
-else:
-    print('O valor 3 não foi digitado.')
+    # Exibição dos resultados
+    print(f"\nNúmeros digitados: {numeros}")
 
-pares = ()
-for num in tupla_quatro_valores:
-    if num % 2 == 0:
-        pares += (num,)
-if pares != ():
-    print(f'Os números pares digitados foram: {pares}.')
-else:
-    print('Não digitados números pares.')
+    # Verifica quantidade de noves
+    print(f"O valor 9 apareceu {qtd_nove} {'vez' if qtd_nove == 1 else 'vezes'}")
 
-    # Resolução dos pares com lista
-# pares = [num for num in tupla_quatro_valores if num % 2 == 0]
-# print(f'Os números pares são: {pares}.')
+    # Verifica posição do número 3
+    try:
+        posicao_tres = numeros.index(3) + 1
+        print(f"O primeiro valor 3 está na {posicao_tres}ª posição")
+    except ValueError:
+        print("O valor 3 não foi digitado")
 
+    # Verifica números pares
+    if numeros_pares:
+        print(f"Números pares digitados: {numeros_pares}")
+    else:
+        print("Nenhum número par foi digitado")
+
+if __name__ == "__main__":
+    main()
